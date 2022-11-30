@@ -67,3 +67,41 @@ class LockTable:
         
         return False
 
+
+    def clear_lock(self, lock, variable):
+        """
+        Clear a particular lock from the variable
+
+        Args:
+            lock: Lock to be cleared
+            variable: variable on which lock is to cleared
+        """
+        if variable in self.lock_map.keys():
+            try:
+                index = self.lock_map[variable].index(lock)
+                self.lock_map[variable] = self.lock_map[variable][
+                    :index] + self.lock_map[variable][index + 1:]
+                if len(self.lock_map[variable]) == 0:
+                    self.lock_map.pop(variable)
+                return True
+            except ValueError:
+                pass
+        return False
+
+    def is_write_locked(self, variable):
+        """
+        Checks whether a write lock is set on variable
+
+        Args:
+            variable: Variable for which write lock is to be checked
+        Returns:
+            bool telling whether the write lock is set
+        """
+        if variable not in self.lock_map:
+            return False
+        else:
+            for lock in self.lock_map[variable]:
+                if lock.get_lock_type() == LockType.Write:
+                    return True
+            else:
+                return False

@@ -12,6 +12,16 @@ class Variable:
         self.lock_type = None
         self.is_locked = None
 
+    @classmethod
+    def get_sites(self, id):
+        if type(id) == str:
+            id = int(id[1:])
+
+        if id % 2 == 0:
+            return 'all'
+        else:
+            return (id % 10) + 1
+
     def get_site_id(self):
 
         return self.site_id
