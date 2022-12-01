@@ -1,5 +1,4 @@
 
-
 class SiteManager:
     '''
     site_numbers: the numbers of sites
@@ -95,8 +94,6 @@ class SiteManager:
         if index <= 0 or index > self.site_numbers:
             raise ValueError("Index must be in range %d to %d" %
                              (1, self.site_numbers))
-
-
 
 
 
