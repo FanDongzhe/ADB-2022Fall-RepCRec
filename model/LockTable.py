@@ -18,7 +18,7 @@ class LockTable:
         if variable not in self.locktable:
             self.locktable[variable] = list()
 
-        for locks in LockTable:
+        for locks in self.locktable[variable]:
             if lock == locks:
                 return
         
@@ -38,6 +38,9 @@ class LockTable:
             self.locktable[variable].remove(lock)
             if len(self.locktable[variable]) == 0:
                 self.locktable.pop(variable)
+            return True
+        
+        return False
 
 
     def delete_all_locks(self, variable):
@@ -55,7 +58,7 @@ class LockTable:
         
         return False
 
-    def is_locked_transaction(self, transaction, variable, lock_type):
+    def is_locked_by_transaction(self, transaction, variable, lock_type):
         
         #whether a variable is locked by a transaction for a specific lock type
         if variable in self.locktable:
@@ -66,4 +69,4 @@ class LockTable:
                         return True
         
         return False
-
+ 

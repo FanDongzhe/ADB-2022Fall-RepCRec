@@ -6,3 +6,4 @@ class TransactionStatus(Enum):
     Waiting = 2
     Abort = 3
     Commit = 4
+    Block = 5
